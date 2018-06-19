@@ -126,9 +126,8 @@ PROGRAM MasterMind
   CHARACTER, allocatable :: secret(:), guess(:)
   logical, allocatable :: match(:)
 
-  call get_command_argument(1, argv,status=i)
-  if (i==0) read(argv,'(I2)', iostat=i) N
-  if (N < 1 .or. N > 99 .or. i/=0) then
+  call get_command_argument(1, argv, status=i); if (i==0) read(argv,'(I2)') N
+  if (N < 1 .or. N > 99) then
     write(stderr,*)  "I need between 1 and 99 letters"
     stop 1
   endif
