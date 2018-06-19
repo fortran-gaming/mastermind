@@ -1,5 +1,5 @@
 
-mastermind: mastermind.f90
+mastermind: random.f90 rand2003.f90 mastermind.f90
 	$(FC) -g $^ -o $@
 	
 clean: 

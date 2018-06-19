@@ -37,7 +37,7 @@ DO i=1,size(secret)
 
 END DO
 
-PRINT '(A,20A1)', "Your score: " , cmatch
+print *, cmatch   ! for easy machine parsing
 
 where (cmatch=='B') match = .true.
 !no need to give any output variable, just print scores to screen
@@ -45,13 +45,11 @@ END function compare
 
 
 impure elemental subroutine getsecret(S)
-! game combiantion from the game letters
+! game combination from the game letters
+use random, only: randint
 character, intent(out) :: S
-REAL :: y
 
-  !get numbers from 1 to 6
-call random_number(y)
-S = letters(int(Y*6+1))
+S = letters(randint(1,size(letters)))
 
 end subroutine getsecret
 
@@ -116,6 +114,7 @@ end module mastermind_game
 
 PROGRAM MasterMind
   use mastermind_game
+  use rand, only: random_init
 
   IMPLICIT NONE
 
@@ -140,6 +139,8 @@ PROGRAM MasterMind
   PRINT *, "The colors possible are: "
   PRINT '(20A2)', letters
 
+  call random_init()
+  
   call getsecret(secret)
 
   DO i=1,M
