@@ -1,5 +1,5 @@
 ! MasterMind.f90
-! http://en.wikipedia.org/wiki/Mastermind_%28board_game%29
+! https://en.wikipedia.org/wiki/Mastermind_%28board_game%29
 !
 ! Copyright 2010 Oz Nahum, 2018 Michael Hirsch, Ph.D.
 ! Affero GPL v3+ license
@@ -9,7 +9,7 @@ module mastermind_game
 implicit none
 
 private :: toUpper
-character, parameter :: letters(*) = ['G','Y','B','R','V','S']
+character, parameter :: letters(6) = ['G','Y','B','R','V','S']  ! 6 for PGI, Flang
 
 contains
 
@@ -127,8 +127,12 @@ PROGRAM MasterMind
   logical, allocatable :: match(:)
 
   call get_command_argument(1, argv,status=i)
-  if (i==0) read(argv,'(A2)') N
-
+  if (i==0) read(argv,'(I2)', iostat=i) N
+  if (N < 1 .or. N > 99 .or. i/=0) then
+    write(stderr,*)  "I need between 1 and 99 letters"
+    stop 1
+  endif
+  
   allocate(secret(N), guess(N), match(N))
 
   PRINT *, "Welcome to MasterMind.   Rules:"
