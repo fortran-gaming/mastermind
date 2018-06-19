@@ -1,3 +1,5 @@
+# GitHub organizations need separate email-based AppVeyor account, sigh
+
 image:
 - Visual Studio 2017
 - Ubuntu
