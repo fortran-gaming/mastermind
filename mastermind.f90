@@ -1,24 +1,8 @@
-!      MasterMind.f90
-!      A Small Fortran Program to imitate the game MasterMind
-!      For more details see
-!      http://en.wikipedia.org/wiki/Mastermind_%28board_game%29
+! MasterMind.f90
+! http://en.wikipedia.org/wiki/Mastermind_%28board_game%29
 !
-!                Copyright 2010 Oz Nahum, 2018 Michael Hirsch, Ph.D.
-!
-!      This program is free software; you can redistribute it and/or modify
-!      it under the terms of the GNU General Public License as posted by
-!      the Free Software Foundation; either version 2 of the License, or
-!      (at your option) any later version.
-!
-!      This program is distributed in the hope that it will be useful,
-!      but WITHOUT ANY WARRANTY; without even the implied warranty of
-!      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-!      GNU General Public License for more details.
-!
-!      You should have received a copy of the GNU General Public License
-!      along with this program; if not, write to the Free Software
-!      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-!      MA 02110-1301, USA.
+! Copyright 2010 Oz Nahum, 2018 Michael Hirsch, Ph.D.
+! Affero GPL v3+ license
 
 module mastermind_game
   use, intrinsic:: iso_fortran_env, only: stderr=>error_unit, stdout=>output_unit
@@ -48,7 +32,7 @@ DO i=1,size(secret)
     cmatch(i)='B'
     cycle
   END IF
-  
+
   where (secret(i) == guess .and. cmatch /= 'B') cmatch = 'W'
 
 END DO
@@ -79,7 +63,7 @@ character function getGuess(i, N) result(guess)
   write(stdout,'(A,I2,A,I2,A)', advance='no') 'Round # ',i, ": Type guess as ",N," letters separated by spaces: "
 
   READ *, guess
-  
+
   guess = toUpper(guess)
 end function getGuess
 
@@ -111,17 +95,16 @@ print *,'Correct!   ',secret
 select case (i)
   case (1,2)
     print '(A,I2,A)', 'How lucky to guess the answer in ',i,' tries'
-  case (3,4) 
+  case (3,4)
     print '(A,I2,A)', 'Excellent strategy, ',i,' is less than the theoretical average minimum tries!'
-  case (5) 
+  case (5)
     print '(A,I2,A)', 'Great: ',i,' tries is consistent with theoretical minimal tries'
   case (6,7,8)
     print '(A,I2,A)', 'Good work, you can do even better than ',i,' tries'
   case (9,10)
     print '(A,I2,A)', 'More practice will help you get it in fewer than ',i,' tries'
   case default
-    write(stderr,*) 'ERROR: impossible number of tries: ',i
-    stop 1
+    print '(A,I2,A)', 'It was ', i,' tries to finish'
 end select
 
 stop
@@ -135,38 +118,34 @@ PROGRAM MasterMind
   use mastermind_game
 
   IMPLICIT NONE
-  
+
   INTEGER :: i
-  integer:: N=4
+  integer:: N=4, M=10
   character(2) :: argv
 
   CHARACTER, allocatable :: secret(:), guess(:)
   logical, allocatable :: match(:)
-  
+
   call get_command_argument(1, argv,status=i)
   if (i==0) read(argv,'(A2)') N
-  
+
   allocate(secret(N), guess(N), match(N))
 
-  PRINT *, "Welcome to the MasterMind", "Game in Fortran"
-          !"*****************************************"
-  PRINT *, "*****************************************"
-  PRINT *, " Here are the rules: "
+  PRINT *, "Welcome to MasterMind.   Rules:"
   print '(A,I2,A)', "I choose a random combination of ",N," colors (letters). "
-  print *, "You have 10 tries to guess what I chose. "
-  PRINT *, " The colors possible are: "
+  print '(A,I2,A)', "You have ",M," tries to guess what I chose. "
+  PRINT *, "The colors possible are: "
   PRINT '(20A2)', letters
-  
+
   call getsecret(secret)
 
-  DO i=1,10
+  DO i=1,M
     guess = getGuess(i, N)
     match = compare(secret, guess)
-    
-  
+
     IF (all(match)) call reward(secret,i)
   END DO
-  
+
   write(stderr,*) "You have reached the maximum allowed tries, you lose"
   stop 1
 
