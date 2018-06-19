@@ -20,60 +20,30 @@
 !      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 !      MA 02110-1301, USA.
 
+module mastermind_game
+  use, intrinsic:: iso_fortran_env, only: stderr=>error_unit, stdout=>output_unit
+implicit none
 
-PROGRAM MasterMind
-
-  IMPLICIT NONE
-  
-  INTEGER :: i,j
-  REAL :: x
-  INTEGER, DIMENSION(50) :: first = (/( 0, i=1,50)/)
-
-  CHARACTER, DIMENSION(4) :: secret,guess
-  logical :: match(4) = .false.
-
-  character, parameter :: gameLetters(*) = ['G','Y','B','R','V','S']
-  PRINT *, "Welcome to the MasterMind", "Game in Fortran"
-          !"*****************************************"
-  PRINT *, "*****************************************"
-  PRINT *, " Here are the rules: "
-  print *, "I choose a random combination of 4 colors out of 6. "
-  print *, "You have 10 tries to guess what I chose. "
-  PRINT *, " The colors possible are: "
-  PRINT *, " Green (G), Yellow (Y),Blue (B), Red (R),   Violet (V), Silver (S) "
-
-  call getsecret(secret)
-
-  DO i=1,10
-    call getGuess(guess)
-    call compare(secret, guess, match)
-    
-  
-    IF (all(match)) THEN
-      print *, "That's right ! ", secret, " after",  i, "rounds !"
-      stop
-    END IF
-  END DO
-  
-  PRINT *, "You have reached the maximu allowed tries, you lose"
+private :: toUpper
+character, parameter :: letters(*) = ['G','Y','B','R','V','S']
 
 contains
 
 
-SUBROUTINE compare(secret, guess, match)
+logical function compare(secret, guess) result(match)
 
 character, INTENT(IN) :: secret(:), guess(:)
-logical, INTENT(OUT) :: match(:)
+dimension :: match(size(secret))
 
 INTEGER :: i,j
-character :: cmatch(4)
+character :: cmatch(size(secret))
 
  cmatch = '0'
  match = .false.
 
 !Just for practicing character operations roundPoints is also converted
 !to a string
-DO i=1,4
+DO i=1,size(secret)
   IF (secret(i) == guess(i)) THEN
     cmatch(i)='B'
     cycle
@@ -83,35 +53,35 @@ DO i=1,4
 
 END DO
 
-PRINT *, "Your score " , cmatch
+PRINT '(A,20A1)', "Your score: " , cmatch
 
 where (cmatch=='B') match = .true.
 !no need to give any output variable, just print scores to screen
-END SUBROUTINE compare
+END function compare
 
 
-impure elemental subroutine getsecret(secret)
-! A subroutine to choose  the game combiantion from the game letters
-character, intent(out) :: secret
-REAL :: Y
+impure elemental subroutine getsecret(S)
+! game combiantion from the game letters
+character, intent(out) :: S
+REAL :: y
 
-call random_number(y)
   !get numbers from 1 to 6
-secret = gameLetters(int(Y*6+1))
+call random_number(y)
+S = letters(int(Y*6+1))
 
-END subroutine getsecret
+end subroutine getsecret
 
 
-SUBROUTINE getGuess(guess)
-  !get user guess
-  character,INTENT(OUT) :: guess(:)
+character function getGuess(i, N) result(guess)
+  integer, intent(in) :: i, N
+  dimension :: guess(N)
 
-  PRINT *, "Type your guess as 4 letters separated by spaces:"
+  write(stdout,'(A,I2,A,I2,A)', advance='no') 'Round # ',i, ": Type guess as ",N," letters separated by spaces: "
 
   READ *, guess
   
   guess = toUpper(guess)
-END SUBROUTINE getGuess
+end function getGuess
 
 
 elemental function toUpper(str)
@@ -130,5 +100,74 @@ elemental function toUpper(str)
   end do
 
 end function toUpper
+
+
+subroutine reward(secret, i)
+character, intent(in) :: secret(:)
+integer, intent(in) :: i
+
+print *,'Correct!   ',secret
+
+select case (i)
+  case (1,2)
+    print '(A,I2,A)', 'How lucky to guess the answer in ',i,' tries'
+  case (3,4) 
+    print '(A,I2,A)', 'Excellent strategy, ',i,' is less than the theoretical average minimum tries!'
+  case (5) 
+    print '(A,I2,A)', 'Great: ',i,' tries is consistent with theoretical minimal tries'
+  case (6,7,8)
+    print '(A,I2,A)', 'Good work, you can do even better than ',i,' tries'
+  case (9,10)
+    print '(A,I2,A)', 'More practice will help you get it in fewer than ',i,' tries'
+  case default
+    write(stderr,*) 'ERROR: impossible number of tries: ',i
+    stop 1
+end select
+
+stop
+
+end subroutine
+
+end module mastermind_game
+
+
+PROGRAM MasterMind
+  use mastermind_game
+
+  IMPLICIT NONE
+  
+  INTEGER :: i
+  integer:: N=4
+  character(2) :: argv
+
+  CHARACTER, allocatable :: secret(:), guess(:)
+  logical, allocatable :: match(:)
+  
+  call get_command_argument(1, argv,status=i)
+  if (i==0) read(argv,'(A2)') N
+  
+  allocate(secret(N), guess(N), match(N))
+
+  PRINT *, "Welcome to the MasterMind", "Game in Fortran"
+          !"*****************************************"
+  PRINT *, "*****************************************"
+  PRINT *, " Here are the rules: "
+  print '(A,I2,A)', "I choose a random combination of ",N," colors (letters). "
+  print *, "You have 10 tries to guess what I chose. "
+  PRINT *, " The colors possible are: "
+  PRINT '(20A2)', letters
+  
+  call getsecret(secret)
+
+  DO i=1,10
+    guess = getGuess(i, N)
+    match = compare(secret, guess)
+    
+  
+    IF (all(match)) call reward(secret,i)
+  END DO
+  
+  write(stderr,*) "You have reached the maximum allowed tries, you lose"
+  stop 1
 
 end program
