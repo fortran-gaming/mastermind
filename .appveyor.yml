@@ -27,11 +27,12 @@ before_build:
 
 build_script:
 
-#- cd bin
-#- cmd: cmake -G "MinGW Makefiles" ..
-#- sh: cmake ..
-- make
-  
+- cd bin
+- cmd: cmake -G "MinGW Makefiles" ..
+- sh: cmake ..
+
+- cmake --build . --target install  
+
 #after_build:
 #- make test
 

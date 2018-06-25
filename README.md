@@ -8,12 +8,15 @@ This is the classic [MasterMind game](https://en.wikipedia.org/wiki/Mastermind_%
 ## Build
 Using any Fortran 2003+ compiler (tested with gfortran, ifort, flang, pgf90):
 
-    make
+    cmake ..
     
-## Usage
+    cmake --build . --target install
 
-    ./mastermind
+## Usage
+Simply type
+
+    mastermind
     
 You can play with more than 4 letters by specifying at the command line. Say you want 8 letters:
 
-    ./mastermind 8
+    mastermind 8

@@ -27,5 +27,7 @@ before_install:
       fi
 
 install: 
-  - make
+  - cmake ..
+  - cmake --build . --target install
 
+script: ctest -V

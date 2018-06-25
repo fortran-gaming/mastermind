@@ -150,7 +150,7 @@ PROGRAM MasterMind
     IF (all(match)) call reward(secret,i)
   END DO
 
-  write(stderr,*) "You have reached the maximum allowed tries, you lose"
-  stop 1
+  print *, "You have reached the maximum allowed tries, you lose"
+  stop 2
 
 end program
