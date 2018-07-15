@@ -13,7 +13,19 @@ Tested with Fortran compilers including:
 * PGI `pgf90`
 
 
-## Build
+## Install 
+
+Pick one of the following methods.
+
+### Homebrew / Linuxbrew
+
+    brew tap scivision/tap
+    
+    brew install rpncalc
+    
+    
+### Compile
+
 Using any Fortran 2003+ compiler:
 
     cmake ..
@@ -21,6 +33,7 @@ Using any Fortran 2003+ compiler:
     cmake --build . --target install
 
 ## Usage
+
 Simply type
 
     mastermind
