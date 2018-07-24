@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/fortran-gaming/mastermind.svg?branch=master)](https://travis-ci.com/fortran-gaming/mastermind)
+[![Build status](https://ci.appveyor.com/api/projects/status/3s4vmat2pkxp9c65?svg=true)](https://ci.appveyor.com/project/scivision/mastermind)
 
 # MasterMind Fortran game
 

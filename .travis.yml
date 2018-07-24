@@ -1,32 +1,29 @@
-language: generic
-fast_finish: true
+language: c
+group: travis_latest
+
+git:
+  depth: 3
+  quiet: true
 
 os:
   - linux
   - osx
-  
-group: travis_latest
 
 env: FC=gfortran
 
-git:
-  depth: 3
-  
-  
 addons:
   apt:
     packages:
       - gfortran
       
 before_install:
-    - if [[ $TRAVIS_OS_NAME == osx ]]; then
+  - if [[ $TRAVIS_OS_NAME == osx ]]; then
       brew update > /dev/null;
-      brew install gcc || true > /dev/null;
-      brew link --overwrite gcc > /dev/null;
+      brew install gcc > /dev/null || brew link --overwrite gcc > /dev/null;
       export FC=gfortran;
-      fi
+    fi
 
-install: 
+install:
   - cd bin
   - cmake ..
   - cmake --build . --target install
