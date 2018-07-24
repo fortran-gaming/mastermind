@@ -46,8 +46,6 @@ add_test(NAME compare COMMAND compare_test)
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   if(UNIX)
     set(CMAKE_INSTALL_PREFIX "~/.local/bin" CACHE PATH "..." FORCE)
-  elseif(WIN32)
-    set(CMAKE_INSTALL_PREFIX "$ENV{HOME}" CACHE PATH "..." FORCE)
   endif()
 endif()
 
