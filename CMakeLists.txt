@@ -27,12 +27,9 @@ elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL Flang)
   list(APPEND FLIBS -static-flang-libs)
 endif()
 
-add_library(random random.f90 rand2003.f90)
-target_compile_options(random PRIVATE ${FFLAGS})
 
-add_library(game mm_game.f90)
+add_library(game mm_game.f90 random.f90 rand2003.f90)
 target_compile_options(game PRIVATE ${FFLAGS})
-target_link_libraries(game PRIVATE random)
 
 add_executable(mastermind mastermind.f90)
 target_compile_options(mastermind PRIVATE ${FFLAGS})
