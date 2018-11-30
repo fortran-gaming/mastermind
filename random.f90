@@ -2,6 +2,15 @@ module random
 
 implicit none
 
+interface
+  module subroutine random_init()
+  end subroutine random_init
+  
+  module subroutine err(msg)
+    character(*),intent(in) :: msg
+  end subroutine err
+end interface
+
 interface std 
   module procedure std_int, std_real
 end interface 

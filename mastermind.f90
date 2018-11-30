@@ -7,7 +7,7 @@
 PROGRAM MasterMind
   use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
   use mm_game, only: getsecret, getguess, compare, reward, letters, getN
-  use rand, only: random_init
+  use random, only: random_init
 
 IMPLICIT NONE
 

@@ -1,3 +1,4 @@
+# gfortran >= 6 due to submodule
 language: c
 group: travis_latest
 dist: xenial
@@ -10,12 +11,15 @@ env: FC=gfortran
 
 addons:
   apt:
+    sources:
+    - ubuntu-toolchain-r-test
     packages:
-    - gfortran
+    - gfortran-6
 
 matrix:
   include:
   - os: linux
+    env: FC=gfortran-6
   - os: osx
     before_install: brew install gcc
   - os: windows
