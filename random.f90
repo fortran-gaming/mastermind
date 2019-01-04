@@ -26,7 +26,7 @@ integer, intent(in), optional :: lo, hi
 integer :: L,H
 real :: r
 
- ! /2 avoids overflow
+!> /2 avoids overflow
 L = -huge(0)/2
 H =  huge(0)/2
 
@@ -39,7 +39,7 @@ randint = floor(r * (H+1 - L)) + L
 
 end function randint
 
-!=========================================
+
 pure real function std_real(A) result(std)
 real, intent(in) :: A(:)
 
@@ -54,7 +54,7 @@ integer, intent(in) :: A(:)
 std = sqrt(sum(abs(A-mean(A))**2) / size(A))
 
 end function std_int
-!==============================================
+
 
 pure real function mean_real(A) result(mean)
 real, intent(in) :: A(:)
@@ -67,7 +67,7 @@ end function mean_real
 pure real function mean_int(A) result(mean)
 integer, intent(in) :: A(:)
 
-mean = sum(A) / real(size(A))  ! real coerces
+mean = sum(A) / real(size(A))  !< real coerces
 
 end function mean_int
 

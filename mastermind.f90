@@ -1,8 +1,8 @@
-! MasterMind.f90
-! https://en.wikipedia.org/wiki/Mastermind_%28board_game%29
-!
-! Copyright 2010 Oz Nahum, 2018 Michael Hirsch, Ph.D.
-! Affero GPL v3+ license
+!! MasterMind in modern Fortran
+!! https://en.wikipedia.org/wiki/Mastermind_%28board_game%29
+!!
+!! Copyright 2010 Oz Nahum, 2018 Michael Hirsch, Ph.D.
+!! GNU Affero GPL v3+ license
 
 PROGRAM MasterMind
   use, intrinsic:: iso_fortran_env, only: stderr=>error_unit

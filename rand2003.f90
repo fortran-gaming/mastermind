@@ -7,7 +7,7 @@ implicit none
 contains
 
 module procedure random_init
-! NOTE: this subroutine is replaced by "call random_init()" in Fortran 2018
+!! NOTE: this subroutine is replaced by "call random_init()" in Fortran 2018
 integer :: i,n, u,ios
 integer, allocatable :: seed(:)
 
@@ -41,7 +41,7 @@ module procedure err
 
 write(stderr,*) msg
 
-stop -1
+stop 1
 
 end procedure err
 

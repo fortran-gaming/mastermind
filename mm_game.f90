@@ -39,7 +39,7 @@ DO i=1,size(guess)
   
   ! print *, i,W
 
-! check if already found enough 'W'
+!> check if already found enough 'W'
   n = count(W)
   if (c(j) < n) then
     cmatch(i) = 'W'
@@ -47,13 +47,14 @@ DO i=1,size(guess)
   endif
 enddo
 
-print *, cmatch   ! for easy machine parsing
+print *, cmatch   
+!! for easy machine parsing
 
 END function compare
 
 
 pure integer function findloc(A,x)
-! this is Fortran 2008 intrinsic, but Gfortran doesn't have it as of Gfortran 8...
+!! this is Fortran 2008 intrinsic, but Gfortran doesn't have it until Gfortran 9
 
 character,intent(in) :: x,A(:)
 integer :: i
@@ -65,14 +66,15 @@ do i = 1,size(A)
   endif
 enddo
 
-findloc = 0  ! no match found, like Fortran 2008 std.
+findloc = 0  
+!! no match found, like Fortran 2008 std.
 
 end function findloc
 
 
 
 impure elemental subroutine getsecret(S)
-! game combination from the game letters
+!! game combination from the game letters
 use random, only: randint
 character, intent(out) :: S
 
@@ -92,7 +94,8 @@ getN = N
 
 call get_command_argument(1, argv, status=i)
 
-if (i==0) read(argv,'(I2)', iostat=i) getN  ! falls back to default if garbage input
+if (i==0) read(argv,'(I2)', iostat=i) getN  
+!! falls back to default if garbage input
 
 end function getN
 
@@ -114,7 +117,7 @@ end function getGuess
 
 
 elemental function toUpper(str)
-! can be trivially extended to non-ASCII
+!! can be trivially extended to non-ASCII
   character(*), intent(in) :: str
   character(len(str)) :: toUpper
   character(*), parameter :: lower="abcdefghijklmnopqrstuvwxyz", &
