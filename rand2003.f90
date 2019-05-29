@@ -6,7 +6,7 @@ implicit none
 
 contains
 
-module procedure random_init
+module procedure rand_init
 !! NOTE: this subroutine is replaced by "call random_init()" in Fortran 2018
 integer :: i,n, u,ios
 integer, allocatable :: seed(:)
@@ -22,19 +22,18 @@ if (ios==0) then
   read(u,iostat=ios) seed
   close(u)
 endif
-  
+
 if (ios/=0) then
   write(stderr,*) 'falling back to internal random number generator'
   do i = 1,n
-    seed(i) = randint() 
+    seed(i) = randint()
   enddo
 endif
 
 
-
 call random_seed(put=seed)
 
-end procedure random_init
+end procedure rand_init
 
 
 module procedure err

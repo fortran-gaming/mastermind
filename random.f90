@@ -3,17 +3,18 @@ module random
 implicit none
 
 interface
-  module subroutine random_init()
-  end subroutine random_init
-  
+  module subroutine rand_init(repeatable, image_distinct)
+    logical, intent(in) :: repeatable, image_distinct
+  end subroutine rand_init
+
   module subroutine err(msg)
     character(*),intent(in) :: msg
   end subroutine err
 end interface
 
-interface std 
+interface std
   module procedure std_int, std_real
-end interface 
+end interface
 
 interface mean
   module procedure mean_int, mean_real

@@ -4,10 +4,9 @@
 !! Copyright 2010 Oz Nahum, 2018 Michael Hirsch, Ph.D.
 !! GNU Affero GPL v3+ license
 
-PROGRAM MasterMind
-  use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
-  use mm_game, only: getsecret, getguess, compare, reward, letters, getN
-  use random, only: random_init
+use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
+use mm_game, only: getsecret, getguess, compare, reward, letters, getN
+use random, only: rand_init
 
 IMPLICIT NONE
 
@@ -19,10 +18,7 @@ logical, allocatable :: match(:)
 
 N = getN(4)
 
-if (N < 1 .or. N > 99) then
-  write(stderr,*)  "I need between 1 and 99 letters"
-  stop 1
-endif
+if (N < 1 .or. N > 99) error stop  "I need between 1 and 99 letters"
 
 allocate(secret(N), guess(N), match(N))
 
@@ -32,7 +28,7 @@ print '(A,I2,A)', "You have ",M," tries to guess what I chose. "
 PRINT *, "The colors possible are: "
 PRINT '(20A2)', letters
 
-call random_init()
+call rand_init(.false., .false.)
 
 call getsecret(secret)
 
