@@ -1,6 +1,6 @@
 if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
-  list(APPEND FFLAGS -std=f2018 -march=native -Wall -Wextra -Wpedantic  #-Warray-temporaries
-  -Werror=array-bounds -fimplicit-none)
+  list(APPEND FFLAGS -march=native -Wall -Wextra -Wpedantic -Werror=array-bounds -fimplicit-none)
+  #-Warray-temporaries
 
   if(CMAKE_BUILD_TYPE STREQUAL Debug)
     list(APPEND FFLAGS -fcheck=all -fexceptions -ffpe-trap=invalid,zero,overflow
