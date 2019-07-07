@@ -1,4 +1,3 @@
-program test_compare
 use mm_game, only: compare, getguess, toupper, getN
 
 implicit none
@@ -34,8 +33,8 @@ endif
 
 
 s = ['g','y','b','r']
-if(.not.all(compare(s,['g','y','b','r']))) stop 1
-if(.not.all(compare(s,['y','g','b','r']) .eqv. [.false.,.false.,.true.,.true.])) stop 2
+if(.not.all(compare(s,['g','y','b','r']))) error stop 1
+if(.not.all(compare(s,['y','g','b','r']) .eqv. [.false.,.false.,.true.,.true.])) error stop 2
 
 end program
 

@@ -24,7 +24,7 @@ if(.not.(size(secret) == size(guess))) stop 99
  match(:) = .false.
  c(:) = 0
 
-where (guess == secret) 
+where (guess == secret)
   cmatch = 'B'
   match = .true.
 endwhere
@@ -32,11 +32,11 @@ endwhere
 DO i=1,size(guess)
   if (match(i)) cycle
 
-  j = findloc(letters, guess(i))
+  j = findfirst(letters, guess(i))
   if (j==0) cycle
 
   W = guess(i) == secret .and. .not.match
-  
+
   ! print *, i,W
 
 !> check if already found enough 'W'
@@ -47,29 +47,29 @@ DO i=1,size(guess)
   endif
 enddo
 
-print *, cmatch   
+print *, cmatch
 !! for easy machine parsing
 
 END function compare
 
 
-pure integer function findloc(A,x)
-!! this is Fortran 2008 intrinsic, but Gfortran doesn't have it until Gfortran 9
+pure integer function findfirst(A,x)
+!! find first matching index in vector
 
-character,intent(in) :: x,A(:)
+character,intent(in) :: x, A(:)
 integer :: i
 
 do i = 1,size(A)
   if (A(i) == x) then
-    findloc = i
+    findfirst = i
     return
   endif
 enddo
 
-findloc = 0  
+findfirst = 0
 !! no match found, like Fortran 2008 std.
 
-end function findloc
+end function findfirst
 
 
 
@@ -94,7 +94,7 @@ getN = N
 
 call get_command_argument(1, argv, status=i)
 
-if (i==0) read(argv,'(I2)', iostat=i) getN  
+if (i==0) read(argv,'(I2)', iostat=i) getN
 !! falls back to default if garbage input
 
 end function getN
