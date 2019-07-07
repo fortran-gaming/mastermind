@@ -23,12 +23,21 @@ Pick one of the following methods.
 
 ### Compile
 
-Using any Fortran 2008 compiler supporting `submodule`:
 ```sh
 cmake -B build
 
 cmake --build build --target install
 ```
+
+OR
+
+```sh
+meson build --prefix=~/.local/bin
+
+meson install -C build
+```
+
+
 
 
 ### Homebrew / Linuxbrew
