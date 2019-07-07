@@ -1,0 +1,7 @@
+add_library(game mm_game.f90 random.f90)
+target_link_libraries(game PRIVATE ${FLIBS})
+if(f18random)
+  target_sources(game PRIVATE rand2018.f90)
+else()
+  target_sources(game PRIVATE rand2003.f90)
+endif()

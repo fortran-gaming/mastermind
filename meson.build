@@ -10,14 +10,9 @@ elif fcid == 'pgi'
   add_global_arguments('-C', '-Mdclchk', language: 'fortran')
 endif
 
-if fc.links('call random_init(.false., .false.); end')
-  rsrc = 'rand2018.f90'
-else
-  rsrc = 'rand2003.f90'
-endif
-game_lib = static_library('game', ['mm_game.f90', 'random.f90', rsrc])
+subdir('src')
 
-executable('mastermind', 'mastermind.f90',
+executable('mastermind', 'src/mastermind.f90',
   link_with : game_lib,
   install : true)
 
