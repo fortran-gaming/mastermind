@@ -22,7 +22,7 @@ init:
 install:
 # had to pip here since stack: python 3 didn't take effect in init:
 - pip install meson
-- ps: meson setup build --prefix $HOME/.local
+- meson setup build
 - meson install -C build
 
 test_script: meson test -C build

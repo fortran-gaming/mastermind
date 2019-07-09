@@ -1,6 +1,6 @@
 project('mastermind', 'fortran',
-  default_options: ['default_library=static', 'buildtype=release'],
-  meson_version: '>=0.50')
+  default_options: ['default_library=static', 'buildtype=release', 'prefix=~/.local'],
+  meson_version: '>=0.51')
 
 fc = meson.get_compiler('fortran')
 fcid = fc.get_id()

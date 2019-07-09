@@ -32,7 +32,7 @@ cmake --build build --target install
 OR
 
 ```sh
-meson build --prefix=~/.local/bin
+meson build
 
 meson install -C build
 ```

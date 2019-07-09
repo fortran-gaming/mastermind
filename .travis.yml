@@ -27,7 +27,7 @@ matrix:
 before_install: pip install meson
 
 install:
-- meson setup build --prefix $HOME/.local
+- meson setup build
 - meson install -C build
 
 script: meson test -C build
