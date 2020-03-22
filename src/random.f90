@@ -3,21 +3,21 @@ module random
 implicit none
 
 interface
-  module subroutine rand_init(repeatable, image_distinct)
-    logical, intent(in) :: repeatable, image_distinct
-  end subroutine rand_init
+module subroutine rand_init(repeatable, image_distinct)
+logical, intent(in) :: repeatable, image_distinct
+end subroutine rand_init
 
-  module subroutine err(msg)
-    character(*),intent(in) :: msg
-  end subroutine err
+module subroutine err(msg)
+character(*),intent(in) :: msg
+end subroutine err
 end interface
 
 interface std
-  module procedure std_int, std_real
+module procedure std_int, std_real
 end interface
 
 interface mean
-  module procedure mean_int, mean_real
+module procedure mean_int, mean_real
 end interface
 
 contains
@@ -28,8 +28,8 @@ integer :: L,H
 real :: r
 
 !> /2 avoids overflow
-L = -huge(0)/2
-H =  huge(0)/2
+L = -2147483646 / 2
+H =  2147483646 / 2
 
 if(present(lo)) L = lo
 if(present(hi)) H = hi

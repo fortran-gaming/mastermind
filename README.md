@@ -1,25 +1,40 @@
-[![Build Status](https://travis-ci.com/fortran-gaming/mastermind.svg?branch=master)](https://travis-ci.com/fortran-gaming/mastermind)
-[![Build status](https://ci.appveyor.com/api/projects/status/3s4vmat2pkxp9c65?svg=true)](https://ci.appveyor.com/project/scivision/mastermind)
-
 # MasterMind Fortran game
+
+![Actions Status](https://github.com/fortran-gaming/mastermind/workflows/ci_meson/badge.svg)
+![Actions Status](https://github.com/fortran-gaming/mastermind/workflows/ci_cmake/badge.svg)
 
 This is the classic
 [MasterMind game](https://en.wikipedia.org/wiki/Mastermind_%28board_game%29)
-in modern Fortran 2018.
+in modern Fortran 2008.
 Some of the other Mastermind Fortran games out there have subtly incorrect game logic, but this one is believed correct.
 
-Tested with Fortran compilers including:
+## Usage
 
-* GNU `gfortran`
-* Intel `ifort`
-* Nvidia `flang`
-* PGI `pgfortran`
+Simply type
 
+```sh
+mastermind
+```
+
+You can play with more than 4 letters by specifying at the command line.
+Say you want 8 letters:
+
+```sh
+mastermind 8
+```
+
+`B`
+: the correct color is in the right position
+
+`W`
+: the color is used, but this guess is in the wrong position
+
+`0`
+: this color is not used in the solution anywhere not already `B`
 
 ## Install
 
 Pick one of the following methods.
-
 
 ### Compile
 
@@ -37,9 +52,6 @@ meson build
 meson install -C build
 ```
 
-
-
-
 ### Homebrew / Linuxbrew
 
 ```sh
@@ -47,16 +59,3 @@ brew tap scivision/tap
 
 brew install mastermind
  ```
-
-## Usage
-
-Simply type
-```sh
-mastermind
-```
-
-You can play with more than 4 letters by specifying at the command line.
-Say you want 8 letters:
-```sh
-mastermind 8
-```

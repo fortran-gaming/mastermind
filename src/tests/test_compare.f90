@@ -1,4 +1,5 @@
-use mm_game, only: compare, getguess, toupper, getN
+use mm_game, only: compare, getguess, getN
+use utils, only : toUpper
 
 implicit none
 
@@ -24,10 +25,10 @@ if (interactive) then
   s = toupper(s)
 
   i = 0
-  do 
+  do
     i = i + 1
     g = getguess(i, N)
-    m = compare(s, g)  
+    m = compare(s, g)
   end do
 endif
 
@@ -37,4 +38,3 @@ if(.not.all(compare(s,['g','y','b','r']))) error stop 1
 if(.not.all(compare(s,['y','g','b','r']) .eqv. [.false.,.false.,.true.,.true.])) error stop 2
 
 end program
-

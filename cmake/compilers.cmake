@@ -1,30 +1,23 @@
-if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
-  add_compile_options(-march=native -Wall -Wextra -Wpedantic -Werror=array-bounds -fimplicit-none)
-  #-Warray-temporaries
+if(CMAKE_Fortran_COMPILER_ID STREQUAL GNU)
+  add_compile_options(-mtune=native -Wall -Wextra -Werror=array-bounds -fimplicit-none)
 
-  if(CMAKE_BUILD_TYPE STREQUAL Debug)
-    add_compile_options(-fcheck=all -fexceptions -ffpe-trap=invalid,zero,overflow
-    -finit-real=nan -Wconversion)
-  endif()
+  string(APPEND CMAKE_Fortran_FLAGS_DEBUG " -fcheck=all -fexceptions -ffpe-trap=invalid,zero,overflow -finit-real=nan -Wconversion")
 
   if(${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 8)
     add_compile_options(-std=f2018)
   endif()
-elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL Intel)
+elseif(CMAKE_Fortran_COMPILER_ID STREQUAL Intel)
   if(WIN32)
     add_compile_options(/W1 /warn:declarations /stand:f18)
   else()
     add_compile_options(-W1 -warn declarations -stand f18)
+    string(APPEND CMAKE_Fortran_FLAGS_DEBUG " -fpe0 -traceback -debug extended -check all")
   endif()
-
-  if(CMAKE_BUILD_TYPE STREQUAL Debug)
-    add_compile_options(-fpe0 -traceback -debug extended -check all)
-  endif()
-elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL PGI)
+elseif(CMAKE_Fortran_COMPILER_ID STREQUAL PGI)
   add_compile_options(-C -Mdclchk)
-elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL Flang)
+elseif(CMAKE_Fortran_COMPILER_ID STREQUAL Flang)
   add_compile_options(-W)
-elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL NAG)
+elseif(CMAKE_Fortran_COMPILER_ID STREQUAL NAG)
   add_compile_options(-f2008 -C -colour -gline -nan -info -u)
 endif()
 
