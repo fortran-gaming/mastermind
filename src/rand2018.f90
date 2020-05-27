@@ -1,5 +1,7 @@
 submodule (random) rand2018
 
+implicit none (type, external)
+
 contains
 
 module procedure rand_init

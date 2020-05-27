@@ -2,7 +2,7 @@ submodule (mm_game) input
 
 use utils, only : toUpper
 
-implicit none
+implicit none (type, external)
 
 contains
 
@@ -26,15 +26,14 @@ module procedure getGuess
 integer :: ios
 
 do
-write(stdout,'(A,I2,A,I2,A)', advance='no') 'Round # ',i, ": Type guess as ",N," letters without spaces: "
+  write(stdout,'(A,I2,A,I2,A)', advance='no') 'Round # ',i, ": Type guess as ",N," letters without spaces: "
 
-READ(stdin, '(*(A1))', iostat=ios) guess
+  read(stdin, '(*(A1))', iostat=ios) guess
 
-if (IS_IOSTAT_END(ios)) then
+  if (IS_IOSTAT_END(ios)) stop 'Goodbye.'
   !! Ctrl-D or Ctrl-Z
-  stop 'Goodbye.'
-endif
-if (all(len_trim(guess) == 1)) exit
+
+  if (all(len_trim(guess) == 1)) exit
 end do
 
 guess = toUpper(guess)

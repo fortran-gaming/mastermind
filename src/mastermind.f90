@@ -1,3 +1,4 @@
+program mastermind
 !! MasterMind in modern Fortran
 !! https://en.wikipedia.org/wiki/Mastermind_%28board_game%29
 !!
@@ -8,12 +9,11 @@ use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
 use mm_game, only: getsecret, getguess, compare, reward, letters, getN
 use random, only: rand_init
 
-IMPLICIT NONE
+implicit none (type, external)
 
-INTEGER :: i
-integer:: N, M=10
+integer :: i, N, M=10
 
-CHARACTER, allocatable :: secret(:), guess(:)
+character, dimension(:), allocatable :: secret, guess
 logical, allocatable :: match(:)
 
 N = getN(4)
@@ -32,12 +32,12 @@ call rand_init(.false., .false.)
 
 call getsecret(secret)
 
-DO i=1,M
-guess = getGuess(i, N)
-match = compare(secret, guess)
+do i=1,M
+  guess = getGuess(i, N)
+  match = compare(secret, guess)
 
-IF (all(match)) call reward(secret,i)
-END DO
+  if (all(match)) call reward(secret,i)
+end do
 
 print *, "You have reached the maximum allowed tries, you lose"
 stop 2

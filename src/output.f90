@@ -1,6 +1,6 @@
 submodule (mm_game) output
 
-implicit none
+implicit none (type, external)
 
 contains
 
@@ -23,7 +23,7 @@ select case (i)
     print '(A,I2,A)', 'It was ', i,' tries to finish'
 end select
 
-stop
+stop 'Thanks for playing Mastermind'
 
 end procedure reward
 

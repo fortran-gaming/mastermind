@@ -1,6 +1,6 @@
 module utils
 
-implicit none
+implicit none (type, external)
 
 contains
 

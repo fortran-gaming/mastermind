@@ -3,7 +3,7 @@ module mm_game
 use, intrinsic:: iso_fortran_env, only: stderr=>error_unit, stdout=>output_unit, stdin=>input_unit
 use utils, only : findfirst
 
-implicit none
+implicit none (type, external)
 
 interface
 module integer function getN(N)
@@ -28,16 +28,15 @@ contains
 
 logical function compare(secret, guess) result(match)
 
-character, INTENT(IN) :: secret(:), guess(:)
+character, intent(in) :: secret(:), guess(:)
 dimension :: match(size(secret))
 
-INTEGER :: i, j, n
+integer :: i, j, n
 integer :: c(size(letters))
 character :: cmatch(size(secret))
 logical :: W(size(secret))
 
 if(.not.(size(secret) == size(guess))) stop 99
-
 
  cmatch(:) = '0'
  match(:) = .false.
@@ -48,7 +47,7 @@ where (guess == secret)
   match = .true.
 endwhere
 
-DO i=1,size(guess)
+do i=1,size(guess)
   if (match(i)) cycle
 
   j = findfirst(letters, guess(i))
@@ -69,7 +68,7 @@ enddo
 print *, cmatch
 !! for easy machine parsing
 
-END function compare
+end function compare
 
 
 impure elemental subroutine getsecret(S)
