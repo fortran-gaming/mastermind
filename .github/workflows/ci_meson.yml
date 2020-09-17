@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.x'
 
-    - run: pip install meson
+    - run: pip install meson ninja
 
     - run: meson setup build
       env:
@@ -41,7 +41,7 @@ jobs:
       with:
         python-version: '3.x'
 
-    - run: pip install meson
+    - run: pip install meson ninja
 
     - run: meson setup build
       env:
@@ -68,8 +68,6 @@ jobs:
     - run: pip install meson ninja
 
     - run: meson setup build
-      env:
-        FC: gfortran-9
 
     - run: meson compile -C build
 
