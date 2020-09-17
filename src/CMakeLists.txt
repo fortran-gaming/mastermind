@@ -11,11 +11,17 @@ set_target_properties(game PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_B
 add_executable(mastermind mastermind.f90)
 target_link_libraries(mastermind game)
 
+# --- tests
+
+if(BUILD_TESTING)
+
 add_executable(compare_test tests/test_compare.f90)
-target_link_libraries(compare_test game)
-add_test(NAME compare COMMAND compare_test)
+target_link_libraries(compare_test PRIVATE game)
+add_test(NAME compare COMMAND $<TARGET_FILE:compare_test>)
 
 if(UNIX)
   add_test(NAME Mastermind
     COMMAND bash -c "$<TARGET_FILE:mastermind> < ${CMAKE_CURRENT_SOURCE_DIR}/tests/cmd.log || [[ $? -eq 2 ]] && echo ")
 endif()
+
+endif(BUILD_TESTING)

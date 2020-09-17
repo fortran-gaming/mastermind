@@ -41,7 +41,10 @@ Pick one of the following methods.
 ```sh
 cmake -B build
 
-cmake --build build --target install
+cmake --build build
+
+# optional
+cmake --install build
 ```
 
 OR

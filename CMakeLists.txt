@@ -5,7 +5,8 @@ endif()
 project(mastermind
 LANGUAGES Fortran
 VERSION 1.4.0)
-enable_testing()
+
+include(CTest)
 
 # this helps linters e.g. Visual Studio Intellicode work properly
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)

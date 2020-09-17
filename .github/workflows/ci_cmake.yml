@@ -16,22 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
-    - name: Install packages
-      run: |
-        pip install cmake
-        sudo apt update -yq
-        sudo apt install -yq --no-install-recommends gfortran
 
     - run: cmake -B build
       env:
-        FC: gfortran
+        FC: gfortran-9
 
     - run: cmake --build build --parallel
 
-    - run: ctest -V --parallel
+    - run: ctest -V
       working-directory: build
 
   windows:
@@ -47,5 +39,5 @@ jobs:
 
     - run: cmake --build build --parallel
 
-    - run: ctest -V --parallel
+    - run: ctest -V
       working-directory: build

@@ -5,12 +5,8 @@ env:
 on:
   push:
     paths:
-      - "**/*.f90"
-      - "**/*.F90"
-      - "**/*.build"
+      - "**/meson.build"
       - ".github/workflows/ci_meson.yml"
-  pull_request:
-  release:
 
 jobs:
 
@@ -18,21 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
     - run: pip install meson
-    - name: Install packages
-      run: |
-        sudo apt update -yq
-        sudo apt install -yq --no-install-recommends ninja-build gfortran
 
     - run: meson setup build
       env:
-        FC: gfortran
+        FC: gfortran-9
 
-    - run: ninja -C build
+    - run: meson compile -C build
 
     - run: meson test -C build
     - uses: actions/upload-artifact@v1
@@ -45,20 +37,18 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    - run: |
-        pip install meson
-        brew install pkg-config gcc ninja
+    - run: pip install meson
 
     - run: meson setup build
       env:
         FC: gfortran-9
         CC: gcc-9
 
-    - run: ninja -C build
+    - run: meson compile -C build
 
     - run: meson test -C build -v --suite nogui
     - uses: actions/upload-artifact@v1
@@ -71,19 +61,17 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    - run: |
-        pip install meson
-        cinst -y ninja
+    - run: pip install meson ninja
 
     - run: meson setup build
       env:
-        FC: gfortran
+        FC: gfortran-9
 
-    - run: ninja -C build
+    - run: meson compile -C build
 
     - run: meson test -C build -v --suite nogui
     - uses: actions/upload-artifact@v1
