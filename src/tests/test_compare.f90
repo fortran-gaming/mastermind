@@ -1,7 +1,9 @@
+program test_compare
+
 use mm_game, only: compare, getguess, getN
 use utils, only : toUpper
 
-implicit none
+implicit none (type, external)
 
 integer :: N
 character, allocatable :: s(:), g(:)
