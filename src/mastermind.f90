@@ -3,7 +3,6 @@ program mastermind
 !! https://en.wikipedia.org/wiki/Mastermind_%28board_game%29
 !!
 !! Copyright 2010 Oz Nahum, 2018 Michael Hirsch, Ph.D.
-!! GNU Affero GPL v3+ license
 
 use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
 use mm_game, only: getsecret, getguess, compare, reward, letters, getN
