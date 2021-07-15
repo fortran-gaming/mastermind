@@ -19,13 +19,3 @@ jobs:
     - run: cmake --build build --parallel
 
     - run: ctest --test-dir build
-
-  windows:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-
-    - run: cmake -B build -G "MinGW Makefiles"
-    - run: cmake --build build --parallel
-
-    - run: ctest --test-dir build
