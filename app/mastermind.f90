@@ -6,7 +6,6 @@ program mastermind
 
 use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
 use mm_game, only: getsecret, getguess, compare, reward, letters, getN
-use random, only: rand_init
 
 implicit none (type, external)
 
@@ -27,7 +26,7 @@ print '(A,I2,A)', "You have ",M," tries to guess what I chose. "
 PRINT *, "The colors possible are: "
 PRINT '(20A2)', letters
 
-call rand_init(.false., .false.)
+call random_init(.false., .false.)
 
 call getsecret(secret)
 

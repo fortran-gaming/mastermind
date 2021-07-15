@@ -8,8 +8,9 @@ include(CTest)
 
 include(cmake/compilers.cmake)
 
-add_executable(mastermind)
-
 add_subdirectory(src)
+
+add_executable(mastermind app/mastermind.f90)
+target_link_libraries(mastermind PRIVATE game)
 
 install(TARGETS mastermind)

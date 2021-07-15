@@ -5,6 +5,6 @@ project('mastermind', 'fortran',
 
 subdir('src')
 
-executable('mastermind', 'src/mastermind.f90',
+executable('mastermind', 'app/mastermind.f90',
   link_with : game_lib,
   install : true)

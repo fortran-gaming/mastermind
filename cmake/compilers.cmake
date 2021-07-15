@@ -1,5 +1,3 @@
-include(CheckFortranSourceCompiles)
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
 if(CMAKE_Fortran_COMPILER_ID STREQUAL GNU)
@@ -14,6 +12,3 @@ elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^Intel")
     string(APPEND CMAKE_Fortran_FLAGS_DEBUG " -fpe0 -traceback -debug extended -check all")
   endif()
 endif()
-
-check_fortran_source_compiles("call random_init(.false., .false.); end"
-  HAS_F2018_RANDOM_INIT SRC_EXT f90)
