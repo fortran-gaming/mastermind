@@ -20,12 +20,7 @@ target_link_libraries(compare_test PRIVATE game)
 add_test(NAME compare COMMAND $<TARGET_FILE:compare_test>)
 set_tests_properties(compare PROPERTIES TIMEOUT 10)
 
-find_program(BASH NAMES bash)
-if(BASH)
-  add_test(NAME Mastermind
-    # Bash for syntax used
-    COMMAND ${BASH} -c "$<TARGET_FILE:mastermind> < ${CMAKE_CURRENT_SOURCE_DIR}/tests/cmd.log || [[ $? -eq 2 ]] && echo ")
-  set_tests_properties(Mastermind PROPERTIES TIMEOUT 10)
-endif()
+add_test(NAME Mastermind COMMAND ${CMAKE_COMMAND} -Dexe:FILEPATH=$<TARGET_FILE:mastermind> -Din_file:FILEPATH=${CMAKE_CURRENT_SOURCE_DIR}/tests/cmd.log -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_mm.cmake)
+set_tests_properties(Mastermind PROPERTIES TIMEOUT 10)
 
 endif(BUILD_TESTING)
