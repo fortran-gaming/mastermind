@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14...3.21)
+cmake_minimum_required(VERSION 3.15...3.21)
 
 project(mastermind
 LANGUAGES Fortran
@@ -13,4 +13,4 @@ add_subdirectory(src)
 add_executable(mastermind app/mastermind.f90)
 target_link_libraries(mastermind PRIVATE game)
 
-install(TARGETS mastermind)
+install(TARGETS mastermind TYPE RUNTIME)
