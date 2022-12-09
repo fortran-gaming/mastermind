@@ -1,4 +1,4 @@
-if(CMAKE_Fortran_COMPILER_ID STREQUAL GNU)
+if(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
   add_compile_options(-Wall -Wextra -Werror=array-bounds -fimplicit-none
   $<$<CONFIG:Release>:-fno-backtrace>
   "$<$<CONFIG:Debug>:-fcheck=all;-fexceptions;-ffpe-trap=invalid,zero,overflow;-finit-real=nan;-Wconversion>"

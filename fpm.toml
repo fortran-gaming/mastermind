@@ -1,7 +1,4 @@
 name = "mastermind"
 version = "1.4.0"
-license = "Apache"
-author = "Michael Hirsch"
-copyright = "2020 Michael Hirsch"
 keywords = ["games"]
 homepage = "https://github.com/fortran-gaming/mastermind"

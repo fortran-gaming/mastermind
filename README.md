@@ -1,6 +1,5 @@
 # MasterMind Fortran game
 
-![Actions Status](https://github.com/fortran-gaming/mastermind/workflows/ci_meson/badge.svg)
 ![Actions Status](https://github.com/fortran-gaming/mastermind/workflows/ci_cmake/badge.svg)
 
 This is the classic
