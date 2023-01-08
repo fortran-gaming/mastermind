@@ -1,6 +1,6 @@
 submodule (mm_game) output
 
-implicit none (type, external)
+implicit none
 
 contains
 

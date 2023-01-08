@@ -3,7 +3,7 @@ module mm_game
 use, intrinsic:: iso_fortran_env, only: stderr=>error_unit, stdout=>output_unit, stdin=>input_unit
 use utils, only : findfirst
 
-implicit none (type, external)
+implicit none
 
 interface
 module integer function getN(N)

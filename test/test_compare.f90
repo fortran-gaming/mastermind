@@ -3,7 +3,7 @@ program test_compare
 use mm_game, only: compare, getguess, getN
 use utils, only : toUpper
 
-implicit none (type, external)
+implicit none
 
 integer :: N
 character, allocatable :: s(:), g(:)

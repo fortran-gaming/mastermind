@@ -7,7 +7,7 @@ program mastermind
 use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
 use mm_game, only: getsecret, getguess, compare, reward, letters, getN
 
-implicit none (type, external)
+implicit none
 
 integer :: i, N, M=10
 

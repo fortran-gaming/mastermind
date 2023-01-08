@@ -2,7 +2,7 @@ submodule (mm_game) input
 
 use utils, only : toUpper
 
-implicit none (type, external)
+implicit none
 
 contains
 
