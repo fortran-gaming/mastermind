@@ -26,3 +26,8 @@ COMMAND ${CMAKE_COMMAND}
   -Dexe:FILEPATH=$<TARGET_FILE:mastermind>
   -Din_file:FILEPATH=${PROJECT_SOURCE_DIR}/test/cmd.log
   -P ${PROJECT_SOURCE_DIR}/test/test_mm.cmake)
+
+# --- auto-ignore build directory
+if(NOT EXISTS ${PROJECT_BINARY_DIR}/.gitignore)
+file(WRITE ${PROJECT_BINARY_DIR}/.gitignore "*")
+endif()
