@@ -1,4 +1,4 @@
-name: ci_cmake
+name: ci
 
 on:
   push:
@@ -13,6 +13,6 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
 
-    - run: cmake --workflow --preset default
+    - run: cmake --workflow default

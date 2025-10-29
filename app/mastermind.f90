@@ -2,7 +2,7 @@ program mastermind
 !! MasterMind in modern Fortran
 !! https://en.wikipedia.org/wiki/Mastermind_%28board_game%29
 !!
-!! Copyright 2010 Oz Nahum, 2018 SciVision
+!! Copyright 2010 Oz Nahum, 2018-2026 SciVision
 
 use, intrinsic:: iso_fortran_env, only: stderr=>error_unit
 use mm_game, only: getsecret, getguess, compare, reward, letters, getN
