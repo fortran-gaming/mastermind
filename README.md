@@ -1,6 +1,6 @@
 # MasterMind Fortran game
 
-![Actions Status](https://github.com/fortran-gaming/mastermind/workflows/ci_cmake/badge.svg)
+[![ci](https://github.com/fortran-gaming/mastermind/actions/workflows/ci_cmake.yml/badge.svg)](https://github.com/fortran-gaming/mastermind/actions/workflows/ci_cmake.yml)
 
 This is the classic
 [MasterMind game](https://en.wikipedia.org/wiki/Mastermind_%28board_game%29)
